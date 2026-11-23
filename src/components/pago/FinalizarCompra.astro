@@ -1,0 +1,96 @@
+---
+/*
+  Finalizar compra (página /pago): resumen del pedido y formulario de datos.
+  Es una compra simulada: no hay cobro ni se pide ningún dato de pago.
+  La lógica vive en src/scripts/pago.ts; el pedido viene del carrito (localStorage).
+*/
+import Boton from "../ui/Boton.astro";
+import Contenedor from "../ui/Contenedor.astro";
+
+const campo = "mt-1 w-full rounded-marca borde-marca bg-fondo px-4 py-3 text-texto";
+---
+
+<section id="finalizar-compra" class="py-8 md:py-12">
+  <Contenedor>
+    <p class="font-titulos text-base font-bold tracking-widest text-marca uppercase" data-revelar>
+      Pago
+    </p>
+    <h1
+      class="mt-4 text-5xl leading-none font-bold tracking-tight uppercase md:text-6xl"
+      data-revelar
+    >
+      Finalizar compra
+    </h1>
+
+    <div data-pago-vacio hidden class="mt-8">
+      <p class="text-lg text-texto-suave">No hay productos en tu carrito.</p>
+      <div class="mt-6">
+        <Boton href="/souvenirs" flecha>Ver souvenirs</Boton>
+      </div>
+    </div>
+
+    <div data-pago-contenido class="mt-8 grid items-start gap-10 lg:grid-cols-2">
+      <div class="rounded-marca bg-superficie p-6 shadow-marca borde-marca">
+        <h2 class="text-2xl font-bold uppercase">Tu pedido</h2>
+        <ul data-pago-lista class="mt-4"></ul>
+        <p class="mt-4 flex items-center justify-between text-xl font-bold">
+          <span>Total</span>
+          <span data-pago-total>$0</span>
+        </p>
+      </div>
+
+      <form data-pago-formulario class="flex flex-col gap-4">
+        <h2 class="text-2xl font-bold uppercase">Tus datos</h2>
+
+        <label class="block font-bold">
+          Nombre completo
+          <input type="text" name="nombre" required autocomplete="name" class={campo} />
+        </label>
+
+        <label class="block font-bold">
+          Correo
+          <input type="email" name="correo" required autocomplete="email" class={campo} />
+        </label>
+
+        <label class="block font-bold">
+          Dirección de entrega
+          <input
+            type="text"
+            name="direccion"
+            required
+            autocomplete="street-address"
+            class={campo}
+          />
+        </label>
+
+        <p class="text-texto-suave">
+          Compra simulada: Sunixia es una marca ficticia. No se cobra nada ni se guarda ningún dato.
+        </p>
+
+        <div>
+          <Boton type="submit" flecha>Confirmar compra</Boton>
+        </div>
+      </form>
+    </div>
+
+    <div
+      data-pago-exito
+      hidden
+      class="mt-8 rounded-marca bg-superficie p-6 shadow-marca borde-marca"
+    >
+      <h2 data-pago-exito-titulo tabindex="-1" class="text-3xl font-bold uppercase">
+        ¡Gracias por tu compra!
+      </h2>
+      <p data-pago-mensaje role="status" class="mt-4 text-lg text-texto-suave"></p>
+      <div class="mt-6">
+        <Boton href="/" flecha>Volver al inicio</Boton>
+      </div>
+    </div>
+  </Contenedor>
+</section>
+
+<script>
+  import { iniciarPago } from "../../scripts/pago";
+
+  iniciarPago();
+</script>

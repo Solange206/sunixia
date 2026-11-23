@@ -1,0 +1,24 @@
+---
+/*
+  Encabezado de Souvenirs: primera sección de la página. Contiene el único <h1>.
+  Su contenido sale de la sección 9 del brief (página Souvenirs, sección Encabezado).
+*/
+import Contenedor from "../ui/Contenedor.astro";
+---
+
+<section id="encabezado" class="pt-8 pb-4 md:pt-12 md:pb-6">
+  <Contenedor>
+    <p class="font-titulos text-base font-bold tracking-widest text-marca uppercase" data-revelar>
+      Souvenirs
+    </p>
+    <h1
+      class="mt-4 text-5xl leading-none font-bold tracking-tight uppercase md:text-6xl"
+      data-revelar
+    >
+      Piezas con identidad propia
+    </h1>
+    <p class="mt-6 max-w-2xl text-lg text-texto-suave md:text-xl" data-revelar>
+      Creamos souvenirs para premiar en concursos, y también puedes comprarlos.
+    </p>
+  </Contenedor>
+</section>

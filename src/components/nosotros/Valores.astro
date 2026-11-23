@@ -1,0 +1,58 @@
+---
+/*
+  Valores: título y 3 tarjetas con ícono dentro de un círculo naranja.
+  Los textos salen de la sección 9 del brief (página Nosotros, sección Valores).
+  Referencia 2b: cada tarjeta aparece subiendo y con fade (data-revelar-cascada) y el ícono
+  se anima al llegar a pantalla (data-icono: "girar", "pulsar" o "inclinar", ver animaciones.ts).
+  Los íconos son decorativos: el título de cada tarjeta ya dice lo mismo, por eso su alt va vacío.
+*/
+import { Image } from "astro:assets";
+import renacimiento from "@pack/imagenes/icono-renacimiento.svg";
+import luzInterior from "@pack/imagenes/icono-luz-interior.svg";
+import evolucion from "@pack/imagenes/icono-evolucion.svg";
+import Seccion from "../ui/Seccion.astro";
+
+const valores = [
+  {
+    titulo: "Renacimiento",
+    texto:
+      "Reinventarnos siempre: cada idea y cada proceso nos permite empezar de nuevo con más fuerza y claridad.",
+    icono: renacimiento,
+    animacion: "girar",
+  },
+  {
+    titulo: "Luz interior",
+    texto:
+      "La energía creativa que ilumina cada proyecto, guía las decisiones y mantiene vivo el propósito.",
+    icono: luzInterior,
+    animacion: "pulsar",
+  },
+  {
+    titulo: "Evolución",
+    texto: "Una creatividad que nunca se queda quieta: experimenta, cambia y crece.",
+    icono: evolucion,
+    animacion: "inclinar",
+  },
+];
+---
+
+<Seccion id="valores" titulo="Nuestros valores">
+  <ul class="grid gap-6 md:grid-cols-3" data-revelar-cascada>
+    {
+      valores.map((valor) => (
+        <li class="rounded-marca bg-superficie p-6 shadow-marca borde-marca">
+          <span class="flex size-16 items-center justify-center rounded-full bg-borde">
+            <Image
+              src={valor.icono}
+              alt=""
+              class="size-9 object-contain"
+              data-icono={valor.animacion}
+            />
+          </span>
+          <h3 class="mt-4 text-xl font-bold uppercase">{valor.titulo}</h3>
+          <p class="mt-2 text-texto-suave">{valor.texto}</p>
+        </li>
+      ))
+    }
+  </ul>
+</Seccion>

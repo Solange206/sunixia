@@ -1,0 +1,89 @@
+---
+/*
+  Encabezado del sitio: logo, menú y botón del carrito.
+  Los enlaces y el tipo de menú salen de src/datos/sitio.ts (`menu` y `encabezado`).
+  El menú desplegable usa <details>: funciona con teclado y sin JavaScript.
+  El enlace de la página actual se marca con aria-current (subrayado naranja).
+*/
+import { Image } from "astro:assets";
+import logo from "@pack/logos/logo-sunixia.svg";
+import Contenedor from "./ui/Contenedor.astro";
+import { encabezado, menu, sitio } from "../datos/sitio";
+
+const actual = Astro.url.pathname.replace(/\/$/, "") || "/";
+const tipo = encabezado.menu;
+
+const enlace =
+  "underline-offset-8 hover:underline aria-[current=page]:underline aria-[current=page]:decoration-borde aria-[current=page]:decoration-2";
+---
+
+<header class:list={["z-40 border-b-2 border-borde bg-fondo", encabezado.fijo && "sticky top-0"]}>
+  <Contenedor class="relative flex items-center justify-between gap-4 py-3">
+    <a href="/" class="shrink-0">
+      <Image src={logo} alt={sitio.nombre} class="h-10 w-auto" />
+    </a>
+
+    <div class="flex items-center gap-4">
+      {
+        tipo !== "desplegable-siempre" && (
+          <nav aria-label="Principal" class={tipo === "desplegable" ? "hidden lg:block" : "block"}>
+            <ul class="flex flex-wrap gap-x-6 gap-y-2">
+              {menu.map((item) => (
+                <li>
+                  <a
+                    href={item.href}
+                    aria-current={item.href === actual ? "page" : undefined}
+                    class={enlace}
+                  >
+                    {item.texto}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        )
+      }
+
+      <button
+        type="button"
+        data-abrir-carrito
+        aria-haspopup="dialog"
+        class="inline-flex items-center gap-2 rounded-marca bg-fondo px-3 py-2 font-titulos text-lg font-bold borde-marca sm:px-4"
+      >
+        Carrito
+        <span data-carrito-cantidad class="rounded-full bg-marca px-2 text-sm text-marca-contraste">
+          0
+        </span>
+        <span class="sr-only">productos en el carrito</span>
+      </button>
+
+      {
+        tipo !== "barra" && (
+          <details class:list={["group", tipo === "desplegable" && "lg:hidden"]}>
+            <summary class="flex cursor-pointer list-none items-center rounded-marca bg-marca px-5 py-2 font-bold text-marca-contraste shadow-marca [&::-webkit-details-marker]:hidden">
+              Menú
+            </summary>
+            <nav
+              aria-label="Principal"
+              class="absolute inset-x-0 top-full border-y border-borde bg-fondo shadow-marca"
+            >
+              <ul class="flex flex-col px-4 py-2 sm:px-6">
+                {menu.map((item) => (
+                  <li>
+                    <a
+                      href={item.href}
+                      aria-current={item.href === actual ? "page" : undefined}
+                      class:list={["block py-3", enlace]}
+                    >
+                      {item.texto}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </details>
+        )
+      }
+    </div>
+  </Contenedor>
+</header>

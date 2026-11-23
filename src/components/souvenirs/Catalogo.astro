@@ -1,0 +1,91 @@
+---
+/*
+  Catálogo: título y 4 tarjetas de souvenirs, cada una de un color distinto.
+  Los datos salen de la sección 9 del brief (página Souvenirs, sección Catálogo).
+  El botón Comprar agrega el souvenir al carrito y lo abre (ver scripts/carrito.ts).
+  Referencias: 1a (cada souvenir en una tarjeta de un color), 1b (el producto sube un poco al pasar
+  el mouse) y 2a (el botón Comprar muestra un aro naranja claro y su flecha se mueve a la derecha).
+  `fondo` es el color de la tarjeta (de la paleta del brief), `foco` el contorno de foco visible sobre él.
+*/
+import { Image } from "astro:assets";
+import gorra from "@pack/imagenes/souvenir-gorra.jpg";
+import termo from "@pack/imagenes/souvenir-termo.jpg";
+import camiseta from "@pack/imagenes/souvenir-camiseta.jpg";
+import portacelular from "@pack/imagenes/souvenir-portacelular.jpg";
+import Boton from "../ui/Boton.astro";
+import Seccion from "../ui/Seccion.astro";
+
+const souvenirs = [
+  {
+    id: "gorra",
+    nombre: "Gorra",
+    precio: 15,
+    imagen: gorra,
+    fondo: "bg-marca text-marca-contraste",
+    foco: "",
+  },
+  {
+    id: "termo",
+    nombre: "Termo",
+    precio: 20,
+    imagen: termo,
+    fondo: "bg-borde text-texto",
+    foco: "",
+  },
+  {
+    id: "camiseta",
+    nombre: "Camiseta",
+    precio: 18,
+    imagen: camiseta,
+    fondo: "bg-superficie text-texto",
+    foco: "",
+  },
+  {
+    id: "portacelular",
+    nombre: "Portacelular",
+    precio: 8,
+    imagen: portacelular,
+    fondo: "bg-texto text-fondo",
+    foco: "focus-visible:outline-fondo",
+  },
+];
+---
+
+<Seccion id="catalogo" titulo="Catálogo">
+  <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4" data-revelar-cascada>
+    {
+      souvenirs.map((souvenir) => (
+        <li
+          class:list={[
+            "group rounded-marca p-4 text-center shadow-marca borde-marca",
+            souvenir.fondo,
+          ]}
+        >
+          <div class="transition-transform duration-300 group-hover:-translate-y-2 motion-reduce:transition-none motion-reduce:group-hover:translate-y-0">
+            <Image
+              src={souvenir.imagen}
+              alt={souvenir.nombre}
+              class="aspect-square w-full rounded-marca object-cover"
+            />
+          </div>
+          <h3 class="mt-4 text-xl font-bold uppercase">{souvenir.nombre}</h3>
+          <p class="mt-1 text-lg font-bold">{`$${souvenir.precio}`}</p>
+          <div class="mt-4">
+            <Boton
+              variante="claro"
+              flecha
+              clase={souvenir.foco}
+              aria-label={`Comprar ${souvenir.nombre}`}
+              data-comprar=""
+              data-id={souvenir.id}
+              data-nombre={souvenir.nombre}
+              data-precio={String(souvenir.precio)}
+            >
+              Comprar
+            </Boton>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</Seccion>

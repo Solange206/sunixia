@@ -1,0 +1,37 @@
+---
+/*
+  Foto con esquinas del sitio y una etiqueta blanca pequeña en la esquina inferior izquierda.
+  Con `mueve` la foto sube un poco al pasar el mouse (referencia 1b del brief).
+  El `alt` y la etiqueta salen del brief.
+
+  Uso:
+    <FotoConEtiqueta src={foto} alt="Texto alternativo" etiqueta="Equipo creativo de Sunixia" mueve />
+*/
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+  etiqueta: string;
+  mueve?: boolean;
+}
+
+const { src, alt, etiqueta, mueve = false } = Astro.props;
+---
+
+<figure
+  class:list={[
+    "relative",
+    mueve &&
+      "transition-transform duration-300 hover:-translate-y-2 motion-reduce:transition-none motion-reduce:hover:translate-y-0",
+  ]}
+  data-revelar
+>
+  <Image src={src} alt={alt} class="w-full rounded-marca shadow-marca" />
+  <figcaption
+    class="absolute bottom-4 left-4 rounded-marca bg-fondo px-3 py-1 font-titulos text-sm font-bold tracking-wider uppercase"
+  >
+    {etiqueta}
+  </figcaption>
+</figure>

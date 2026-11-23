@@ -1,0 +1,74 @@
+---
+/*
+  Botón reutilizable. Su estilo sale de los tokens (marca, radio, sombra), sin borde, como en el boceto.
+  - Con `href` se dibuja como enlace <a> (para navegar).
+  - Sin `href` se dibuja como <button> (para acciones, por ejemplo un formulario).
+  - `flecha` agrega una flecha → que se desplaza a la derecha y un aro naranja claro
+    al pasar el mouse (referencia 2a del brief).
+
+  Uso:
+    <Boton href="/contacto">Escríbenos</Boton>
+    <Boton variante="oscuro" href="/contacto">Cotiza tu idea</Boton>
+    <Boton variante="claro" href="/contacto" flecha>Comprar</Boton>
+    <Boton href="/contacto" flecha>Cotiza tu idea</Boton>
+*/
+
+interface Props {
+  href?: string;
+  variante?: "primario" | "secundario" | "oscuro" | "claro";
+  type?: "button" | "submit";
+  flecha?: boolean;
+  clase?: string; // clases extra (por ejemplo, el color del contorno de foco)
+  "aria-label"?: string;
+  [atributo: `data-${string}`]: string | undefined; // atributos data-* (los usa el carrito)
+}
+
+const {
+  href,
+  variante = "primario",
+  type = "button",
+  flecha = false,
+  clase,
+  ...atributos
+} = Astro.props;
+
+const base =
+  "group inline-flex items-center gap-2 rounded-marca px-5 py-3 font-titulos text-lg font-bold tracking-wide shadow-marca transition hover:opacity-85 motion-reduce:transition-none";
+
+const variantes = {
+  primario: "bg-marca text-marca-contraste",
+  secundario: "bg-superficie text-texto",
+  oscuro: "bg-texto text-fondo",
+  claro: "bg-fondo text-texto",
+};
+
+const aro = flecha ? "hover:ring-4 hover:ring-borde/30" : "";
+---
+
+{
+  href ? (
+    <a href={href} {...atributos} class:list={[base, variantes[variante], aro, clase]}>
+      <slot />
+      {flecha && (
+        <span
+          aria-hidden="true"
+          class="transition-transform group-hover:translate-x-1 motion-reduce:transition-none"
+        >
+          →
+        </span>
+      )}
+    </a>
+  ) : (
+    <button type={type} {...atributos} class:list={[base, variantes[variante], aro, clase]}>
+      <slot />
+      {flecha && (
+        <span
+          aria-hidden="true"
+          class="transition-transform group-hover:translate-x-1 motion-reduce:transition-none"
+        >
+          →
+        </span>
+      )}
+    </button>
+  )
+}

@@ -1,0 +1,27 @@
+---
+/*
+  Para concursos / A la venta: dos tarjetas de color superficie.
+  Los textos salen de la sección 9 del brief (página Souvenirs, sección Para concursos / A la venta).
+*/
+import Contenedor from "../ui/Contenedor.astro";
+
+const tarjetas = [
+  { titulo: "Para concursos", texto: "Premios diseñados por Sunixia para tu concurso o evento." },
+  { titulo: "A la venta", texto: "Souvenirs disponibles para comprar, con diseño propio." },
+];
+---
+
+<section id="para-concursos-a-la-venta" class="py-6 md:py-8">
+  <Contenedor>
+    <ul class="grid gap-6 md:grid-cols-2" data-revelar-cascada>
+      {
+        tarjetas.map((tarjeta) => (
+          <li class="rounded-marca bg-superficie p-6 shadow-marca borde-marca">
+            <h2 class="text-2xl font-bold uppercase">{tarjeta.titulo}</h2>
+            <p class="mt-2 text-texto-suave">{tarjeta.texto}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </Contenedor>
+</section>

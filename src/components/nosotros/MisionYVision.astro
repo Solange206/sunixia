@@ -1,0 +1,35 @@
+---
+/*
+  Misión y visión: franja azul con dos tarjetas de color superficie.
+  Los textos salen de la sección 9 del brief (página Nosotros, sección Misión y visión).
+*/
+import Contenedor from "../ui/Contenedor.astro";
+
+const tarjetas = [
+  {
+    titulo: "Misión",
+    texto:
+      "Impulsar la creatividad a través de la reinvención constante, usando el diseño y la expresión visual para transformar experiencias en proyectos con identidad y propósito.",
+  },
+  {
+    titulo: "Visión",
+    texto:
+      "Ser una agencia reconocida por su autenticidad y su evolución constante, que inspire a otros a descubrir su propia voz creativa.",
+  },
+];
+---
+
+<section id="mision-y-vision" class="bg-marca py-10 md:py-14">
+  <Contenedor>
+    <ul class="grid gap-6 md:grid-cols-2" data-revelar-cascada>
+      {
+        tarjetas.map((tarjeta) => (
+          <li class="rounded-marca bg-superficie p-6 shadow-marca borde-marca">
+            <h2 class="text-2xl font-bold uppercase">{tarjeta.titulo}</h2>
+            <p class="mt-2 text-texto-suave">{tarjeta.texto}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </Contenedor>
+</section>

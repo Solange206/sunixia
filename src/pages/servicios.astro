@@ -1,0 +1,27 @@
+---
+/*
+  Página Servicios (ruta "/servicios"). Las secciones van en el orden del brief.
+  Las 4 áreas se ordenan aquí en una cuadrícula: 1 columna en celular y 2 desde tablet.
+*/
+import Layout from "../layouts/Layout.astro";
+import Contenedor from "../components/ui/Contenedor.astro";
+import Encabezado from "../components/servicios/Encabezado.astro";
+import CreacionDeMarca from "../components/servicios/CreacionDeMarca.astro";
+import Campanas from "../components/servicios/Campanas.astro";
+import ContenidoEnRedes from "../components/servicios/ContenidoEnRedes.astro";
+import Fotografia from "../components/servicios/Fotografia.astro";
+import LlamadoAContactar from "../components/servicios/LlamadoAContactar.astro";
+---
+
+<Layout title="Servicios | Sunixia">
+  <Encabezado />
+  <section class="pt-4 pb-12 md:pb-16">
+    <Contenedor class="grid gap-6 md:grid-cols-2">
+      <CreacionDeMarca />
+      <Campanas />
+      <ContenidoEnRedes />
+      <Fotografia />
+    </Contenedor>
+  </section>
+  <LlamadoAContactar />
+</Layout>

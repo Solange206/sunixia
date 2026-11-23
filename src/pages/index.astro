@@ -1,0 +1,18 @@
+---
+/*
+  Página de inicio (ruta "/").
+  Una página solo importa el Layout y ordena las secciones, en el orden del brief.
+*/
+import Layout from "../layouts/Layout.astro";
+import Portada from "../components/inicio/Portada.astro";
+import LoQueHacemos from "../components/inicio/LoQueHacemos.astro";
+import Souvenirs from "../components/inicio/Souvenirs.astro";
+import LlamadoAContactar from "../components/inicio/LlamadoAContactar.astro";
+---
+
+<Layout title="Sunixia | Ideas que brillan, marcas que renacen">
+  <Portada />
+  <LoQueHacemos />
+  <Souvenirs />
+  <LlamadoAContactar />
+</Layout>

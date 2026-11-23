@@ -1,0 +1,35 @@
+---
+/*
+  Historia: primera sección de Nosotros. Contiene el único <h1> de la página.
+  Su contenido sale de la sección 9 del brief (página Nosotros, sección Historia).
+*/
+import equipo from "@pack/imagenes/nosotros-equipo.jpg";
+import Contenedor from "../ui/Contenedor.astro";
+import FotoConEtiqueta from "../ui/FotoConEtiqueta.astro";
+---
+
+<section id="historia" class="py-8 md:py-12">
+  <Contenedor class="grid items-center gap-10 lg:grid-cols-2">
+    <div>
+      <p class="font-titulos text-base font-bold tracking-widest text-marca uppercase" data-revelar>
+        Nosotros
+      </p>
+      <h1
+        class="mt-4 text-5xl leading-none font-bold tracking-tight uppercase md:text-6xl"
+        data-revelar
+      >
+        Sunixia es evolución
+      </h1>
+      <p class="mt-6 max-w-xl text-lg text-texto-suave md:text-xl" data-revelar>
+        Es cada proyecto que dejamos atrás para dar vida a uno mejor, y cada renacer que nos mueve a
+        crear.
+      </p>
+    </div>
+
+    <FotoConEtiqueta
+      src={equipo}
+      alt="El equipo celebrando un proyecto terminado"
+      etiqueta="Foto: el equipo de Sunixia"
+    />
+  </Contenedor>
+</section>

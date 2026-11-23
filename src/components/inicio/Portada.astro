@@ -1,0 +1,42 @@
+---
+/*
+  Portada: la primera sección que se ve. Contiene el único <h1> de la página.
+  Su contenido sale de la sección 9 del brief (página Inicio, sección Portada).
+*/
+import equipo from "@pack/imagenes/equipo-sunixia.jpg";
+import Boton from "../ui/Boton.astro";
+import Contenedor from "../ui/Contenedor.astro";
+import FotoConEtiqueta from "../ui/FotoConEtiqueta.astro";
+---
+
+<section id="portada" class="py-8 md:py-12">
+  <Contenedor class="grid items-center gap-10 lg:grid-cols-2">
+    <div>
+      <p class="font-titulos text-base font-bold tracking-widest text-marca uppercase" data-revelar>
+        Agencia creativa
+      </p>
+
+      <h1
+        class="mt-4 text-5xl leading-none font-bold tracking-tight uppercase md:text-7xl"
+        data-revelar
+      >
+        Ideas que brillan, marcas que renacen
+      </h1>
+
+      <p class="mt-6 max-w-xl text-lg text-texto-suave md:text-xl" data-revelar>
+        Un equipo de especialistas que crea tu marca, tus campañas, tu contenido y tus souvenirs.
+      </p>
+
+      <div class="mt-8" data-revelar>
+        <Boton href="/servicios">Ver servicios</Boton>
+      </div>
+    </div>
+
+    <FotoConEtiqueta
+      src={equipo}
+      alt="El equipo creativo trabajando en una mesa con laptops y bocetos"
+      etiqueta="Equipo creativo de Sunixia"
+      mueve
+    />
+  </Contenedor>
+</section>

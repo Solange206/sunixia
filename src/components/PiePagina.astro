@@ -1,0 +1,43 @@
+---
+/*
+  Pie de página del sitio: nombre y eslogan a la izquierda; correo, redes y derechos a la derecha.
+  Los datos salen de src/datos/sitio.ts.
+*/
+import Contenedor from "./ui/Contenedor.astro";
+import { redes, sitio } from "../datos/sitio";
+
+const enlace = "underline underline-offset-4 hover:text-fondo focus-visible:outline-fondo";
+---
+
+<footer class="border-t-2 border-borde bg-texto text-fondo">
+  <Contenedor class="flex flex-col gap-6 py-10 sm:flex-row sm:items-start sm:justify-between">
+    <div>
+      <p class="font-titulos text-2xl font-bold tracking-wide uppercase">{sitio.nombre}</p>
+      <p class="mt-1 text-fondo/85">{sitio.pie}</p>
+    </div>
+
+    <div class="flex flex-col gap-1 text-fondo/85 sm:items-end">
+      {
+        sitio.correo && (
+          <a href={`mailto:${sitio.correo}`} class={enlace}>
+            {sitio.correo}
+          </a>
+        )
+      }
+      {
+        redes.length > 0 && (
+          <ul class="flex flex-wrap gap-x-2">
+            {redes.map((red) => (
+              <li class="after:ml-2 after:content-['·'] last:after:content-none">
+                <a href={red.href} class={enlace}>
+                  {red.nombre}
+                </a>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+      <p>© {sitio.nombre}</p>
+    </div>
+  </Contenedor>
+</footer>

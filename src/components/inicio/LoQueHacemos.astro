@@ -1,0 +1,40 @@
+---
+/*
+  Lo que hacemos: título y 4 tarjetas de servicios.
+  Los textos salen de la sección 9 del brief (página Inicio, sección Lo que hacemos).
+*/
+import Seccion from "../ui/Seccion.astro";
+
+const servicios = [
+  {
+    titulo: "Creación de marca",
+    descripcion:
+      "Te ayudamos a crear tu marca propia: nombre, identidad y todo lo que la hace única.",
+  },
+  {
+    titulo: "Campañas",
+    descripcion: "Campañas de marketing con una idea clara, pensadas para que tu marca se note.",
+  },
+  {
+    titulo: "Contenido en redes",
+    descripcion: "Publicaciones y contenido para redes con la voz y la luz de tu marca.",
+  },
+  {
+    titulo: "Fotografía",
+    descripcion: "Fotografía de producto, de marca y de eventos para contar tu historia.",
+  },
+];
+---
+
+<Seccion id="lo-que-hacemos" titulo="Lo que hacemos">
+  <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4" data-revelar-cascada>
+    {
+      servicios.map((servicio) => (
+        <li class="rounded-marca bg-superficie p-6 shadow-marca borde-marca">
+          <h3 class="text-xl font-bold uppercase">{servicio.titulo}</h3>
+          <p class="mt-2 text-texto-suave">{servicio.descripcion}</p>
+        </li>
+      ))
+    }
+  </ul>
+</Seccion>

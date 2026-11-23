@@ -1,0 +1,32 @@
+---
+/*
+  Tarjeta de un área de Servicios: imagen con etiqueta, título y texto.
+  Cada área (CreacionDeMarca, Campanas, ContenidoEnRedes, Fotografia) usa esta tarjeta
+  con sus propios datos del brief. Es un <article>: la página las ordena en una cuadrícula.
+*/
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  id: string;
+  titulo: string;
+  texto: string;
+  imagen: ImageMetadata;
+  alt: string;
+}
+
+const { id, titulo, texto, imagen, alt } = Astro.props;
+---
+
+<article id={id} class="rounded-marca bg-superficie p-4 shadow-marca borde-marca" data-revelar>
+  <figure class="relative">
+    <Image src={imagen} alt={alt} class="w-full rounded-marca shadow-marca" />
+    <figcaption
+      class="absolute bottom-3 left-3 rounded-marca bg-fondo px-3 py-1 font-titulos text-sm font-bold tracking-wider uppercase"
+    >
+      {titulo}
+    </figcaption>
+  </figure>
+  <h2 class="mt-4 text-2xl font-bold uppercase">{titulo}</h2>
+  <p class="mt-2 text-texto-suave">{texto}</p>
+</article>

@@ -1,0 +1,18 @@
+---
+/*
+  Página Contacto (ruta "/contacto"). El encabezado y las tarjetas van lado a lado en computadora.
+*/
+import Layout from "../layouts/Layout.astro";
+import Contenedor from "../components/ui/Contenedor.astro";
+import Encabezado from "../components/contacto/Encabezado.astro";
+import BotonesDeCorreoYRedes from "../components/contacto/BotonesDeCorreoYRedes.astro";
+---
+
+<Layout title="Contacto | Sunixia">
+  <section class="py-8 md:py-12">
+    <Contenedor class="grid items-start gap-10 lg:grid-cols-2">
+      <Encabezado />
+      <BotonesDeCorreoYRedes />
+    </Contenedor>
+  </section>
+</Layout>

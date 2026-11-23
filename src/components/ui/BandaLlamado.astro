@@ -1,0 +1,41 @@
+---
+/*
+  Banda naranja de ancho completo con un título, un texto opcional y un botón oscuro.
+  La usan las secciones "Llamado a contactar" de Inicio, Nosotros y Servicios:
+  cada una pone sus propios textos (salen del brief) y comparte el mismo diseño.
+
+  Uso:
+    <BandaLlamado id="llamado-a-contactar" titulo="Creemos algo juntos" texto="Cuéntanos tu proyecto."
+      boton="Cotiza tu idea" href="/contacto" />
+*/
+import Boton from "./Boton.astro";
+import Contenedor from "./Contenedor.astro";
+
+interface Props {
+  id: string;
+  titulo: string;
+  texto?: string;
+  boton: string;
+  href: string;
+}
+
+const { id, titulo, texto, boton, href } = Astro.props;
+---
+
+<section id={id} class="bg-borde py-12 text-center text-texto md:py-16">
+  <Contenedor>
+    <h2 class="text-3xl font-bold tracking-tight uppercase md:text-5xl" data-revelar>
+      {titulo}
+    </h2>
+    {
+      texto && (
+        <p class="mt-4 text-lg" data-revelar>
+          {texto}
+        </p>
+      )
+    }
+    <div class="mt-8" data-revelar>
+      <Boton href={href} variante="oscuro" flecha>{boton}</Boton>
+    </div>
+  </Contenedor>
+</section>

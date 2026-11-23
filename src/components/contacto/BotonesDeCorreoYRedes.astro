@@ -1,0 +1,60 @@
+---
+/*
+  Botones de correo y redes: tres tarjetas (Correo, Instagram, TikTok).
+  Los datos salen de la sección 9 del brief (página Contacto, sección Botones de correo y redes);
+  el correo y los enlaces de redes vienen de src/datos/sitio.ts.
+  Marca ficticia: los botones "Seguir" apuntan a "#" (sin enlace real).
+  En celular, el botón de Correo va debajo del dato; en Instagram y TikTok queda a la derecha.
+*/
+import Boton from "../ui/Boton.astro";
+import { redes, sitio } from "../../datos/sitio";
+
+const enlaceDe = (nombre: string) => redes.find((red) => red.nombre === nombre)?.href ?? "#";
+
+const tarjetas = [
+  {
+    id: "correo",
+    titulo: "Correo",
+    dato: sitio.correo,
+    boton: "Escribir",
+    href: `mailto:${sitio.correo}`,
+    botonAbajo: true,
+  },
+  {
+    id: "instagram",
+    titulo: "Instagram",
+    dato: "@sunixia",
+    boton: "Seguir",
+    href: enlaceDe("Instagram"),
+    botonAbajo: false,
+  },
+  {
+    id: "tiktok",
+    titulo: "TikTok",
+    dato: "@sunixia",
+    boton: "Seguir",
+    href: enlaceDe("TikTok"),
+    botonAbajo: false,
+  },
+];
+---
+
+<ul id="botones-de-correo-y-redes" class="flex flex-col gap-4" data-revelar-cascada>
+  {
+    tarjetas.map((tarjeta) => (
+      <li
+        id={tarjeta.id}
+        class:list={[
+          "flex gap-4 rounded-marca bg-superficie p-6 shadow-marca borde-marca sm:flex-row sm:items-center sm:justify-between",
+          tarjeta.botonAbajo ? "flex-col items-start" : "flex-row items-center justify-between",
+        ]}
+      >
+        <div class="min-w-0">
+          <h2 class="text-2xl font-bold uppercase">{tarjeta.titulo}</h2>
+          <p class="mt-1 break-words text-texto-suave">{tarjeta.dato}</p>
+        </div>
+        <Boton href={tarjeta.href}>{tarjeta.boton}</Boton>
+      </li>
+    ))
+  }
+</ul>

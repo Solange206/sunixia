@@ -1,0 +1,33 @@
+---
+/*
+  Souvenirs: bloque de color superficie con imagen, texto y botón.
+  Su contenido sale de la sección 9 del brief (página Inicio, sección Souvenirs).
+*/
+import souvenirs from "@pack/imagenes/souvenirs-inicio.jpg";
+import Boton from "../ui/Boton.astro";
+import Contenedor from "../ui/Contenedor.astro";
+import FotoConEtiqueta from "../ui/FotoConEtiqueta.astro";
+---
+
+<section id="souvenirs" class="bg-superficie py-12 md:py-16">
+  <Contenedor class="grid items-center gap-10 lg:grid-cols-2">
+    <FotoConEtiqueta
+      src={souvenirs}
+      alt="Varios souvenirs juntos, en los colores de la marca"
+      etiqueta="Souvenirs Sunixia"
+      mueve
+    />
+
+    <div>
+      <h2 class="text-3xl font-bold tracking-tight uppercase md:text-5xl" data-revelar>
+        Souvenirs con identidad
+      </h2>
+      <p class="mt-4 max-w-xl text-lg text-texto-suave" data-revelar>
+        Premios para concursos creados por nosotros, y piezas que también puedes comprar.
+      </p>
+      <div class="mt-8" data-revelar>
+        <Boton href="/souvenirs">Ver souvenirs</Boton>
+      </div>
+    </div>
+  </Contenedor>
+</section>
